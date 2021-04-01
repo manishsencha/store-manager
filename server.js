@@ -18,7 +18,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/", async (req, res) => {
   try {
-
     const storeData = await StoreData.find();
     const cartData = await CartData.find();
     res.render("index.ejs", {
@@ -26,17 +25,17 @@ app.get("/", async (req, res) => {
       cartData: cartData,
       message: "",
     });
-  }catch(e) {
-    res.redirect('/');
+  } catch (e) {
+    res.redirect("/");
   }
 });
 
 app.post("/delete/:name", async (req, res) => {
   try {
     await StoreData.findOneAndRemove({ item: req.params.name });
-    res.redirect( '/');
+    res.redirect("/");
   } catch (e) {
-    res.redirect('/');
+    res.redirect("/");
   }
 });
 
@@ -79,8 +78,7 @@ app.post("/deletecart/:name", async (req, res) => {
     } else {
       storeData.quantity += parseInt(cartData.quantity);
       storeData.save();
-      cartData.remove();
-      cartData.save();
+      await CartData.findOneAndRemove({ item: req.params.name });
       res.redirect("/");
     }
   } catch (e) {
