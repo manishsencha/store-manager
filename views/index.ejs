@@ -18,31 +18,30 @@
     <title>Store-Manager</title>
     <style>
       .split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  z-index: 1;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
+        height: 100%;
+        width: 50%;
+        position: fixed;
+        z-index: 1;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
 
-/* Control the left side */
-.left {
-  left: 0;
-}
+      /* Control the left side */
+      .left {
+        left: 0;
+      }
 
-/* Control the right side */
-.right {
-  right: 0;
-}
+      /* Control the right side */
+      .right {
+        right: 0;
+      }
     </style>
   </head>
   <body>
-    
     <!-- Body Begins-->
     <div class="container">
       <!--Error toast-->
-      <%= message %> 
+      <%= message %>
       <!-- Header-->
       <div class="d-flex flex-row my-2 justify-content-between">
         <h1>Manage Store</h1>
@@ -50,130 +49,130 @@
 
       <!-- Add Stock form-->
       <div class="container split left">
-
         <h3>Add Stock</h3>
         <form
-        action="/adddata"
-        method="POST"
-        class="my-4 form-group d-flex flex-row justify-content-start"
-        autocomplete="off"
+          action="/adddata"
+          method="POST"
+          class="my-4 form-group d-flex flex-row justify-content-start"
+          autocomplete="off"
         >
-        <div class="mb-3 mx-2">
-          <label for="item" class="visually-hidden form-label">Item</label>
-          <input
-          type="text"
-          class="form-control"
-          placeholder="Item"
-          name="item"
-          id="item"
-          required
-          />
-        </div>
-        <div class="mb-3 mx-2">
-          <label for="quantity" class="visually-hidden form-label">Quantity</label>
-          <input
-          type="number"
-          class="form-control"
-          placeholder="Quantity"
-          name="quantity"
-          id="quantity"
-          min="0"
-          required
-          />
-      </div>
-      <div class="mb-3 mx-2">
-        
-        <button type="submit" class="btn btn-success">Add</button>
-      </div>
-    </form>
-    <!--Stock details and management-->
-    <table class="mt-4 table table-striped table-responsive">
-      <thead>
-        <tr>
-          <td>Item</td>
-          <td>Stock</td>
-        </tr>
-      </thead>
-      <tbody>
-        <% storeData.forEach(data => {%>
-          <tr>
-            <td><%= data.item%></td>
-            <td><%= data.quantity %></td>
-            <td>
-              <form action="/delete/<%= data.item %> " method="POST">
-                <button
-                type="submit"
-                class="btn btn-danger"
-                >
-                Remove
-              </button>
-            </form>
-          </td>
-          <td>
-            <form action="/addtocart/<%= data.item%> " method="POST">
-              <button class="btn btn-primary">Add to Cart</button>
-            </form>
-          </td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
-    
-  </div>
-    <!--  Buy Item section -->
-    <div class="container split right">
-
-      <h1 class="my-4">BUY ITEM</h1>
-      <!-- My Cart-->
-      <h2 class="my-2"> CART</h2>
-      
-      <!--Items in Cart -->
-      <table class="mt-4 table table-striped table-responsive">
-        <thead>
-          <tr>
-            <td>Item</td>
-            <td>Quantity</td>
-          </tr>
-        </thead>
-        <tbody>
-          <% cartData.forEach(data => {%>
+          <div class="mb-3 mx-2">
+            <label for="item" class="visually-hidden form-label">Item</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Item"
+              name="item"
+              id="item"
+              required
+            />
+          </div>
+          <div class="mb-3 mx-2">
+            <label for="quantity" class="visually-hidden form-label"
+              >Quantity</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Quantity"
+              name="quantity"
+              id="quantity"
+              min="0"
+              required
+            />
+          </div>
+          <div class="mb-3 mx-2">
+            <button type="submit" class="btn btn-success">Add</button>
+          </div>
+        </form>
+        <!--Stock details and management-->
+        <table class="mt-4 table table-striped table-responsive">
+          <thead>
             <tr>
-              
+              <td>Item</td>
+              <td>Stock</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% storeData.forEach(data => {%>
+            <tr>
+              <td><%= data.item%></td>
+              <td><%= data.quantity %></td>
+              <td>
+                <form action="/delete/<%= data.item %> " method="POST">
+                  <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+              </td>
+              <td>
+                <form action="/addtocart/<%= data.item%> " method="POST">
+                  <button class="btn btn-primary">Add to Cart</button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <!--  Buy Item section -->
+      <div class="container split right">
+        <h1 class="my-4">BUY ITEM</h1>
+        <!-- My Cart-->
+        <h2 class="my-2">CART</h2>
+
+        <!--Items in Cart -->
+        <table class="mt-4 table table-striped table-responsive">
+          <thead>
+            <tr>
+              <td>Item</td>
+              <td>Quantity</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% cartData.forEach(data => {%>
+            <tr>
               <td><%= data.item%></td>
               <td><%= data.quantity %></td>
               <td>
                 <form action="/deletecart/<%= data.item %> " method="POST">
-                  <button
-                  type="submit"
-                  class="btn btn-danger"
-                  >
-                  Remove from Cart
-                </button>
-              </form>
-            </td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
-      <button type="submit" class="btn btn-success">
-        <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-bag-check-fill"
-        viewBox="0 0 16 16"
-        >
-        <path
-        fill-rule="evenodd"
-        d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"
-        ></path>
-      </svg>
-          Buy
-        </button>
-      </form>
-    </div>
+                  <button type="submit" class="btn btn-danger">
+                    Remove from Cart
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <form action="/buy" method="POST">
+          <div class="mb-3 mx-2">
+            <label for="name" class="visually-hidden form-label">Item</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="name"
+              name="name"
+              id="name"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-success">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-bag-check-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"
+              ></path>
+            </svg>
+            Buy
+          </button>
+        </form>
+      </div>
     </div>
   </body>
-  </html>
-  
+</html>

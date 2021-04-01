@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const StoreData = require("./data");
 const CartData = require("./cart");
-
+const PurchaseRecord = require("./purchaserecord");
 const app = express();
 const PORT = 3000 || process.env.PORT;
 
@@ -81,6 +81,20 @@ app.post("/deletecart/:name", async (req, res) => {
       await CartData.findOneAndRemove({ item: req.params.name });
       res.redirect("/");
     }
+  } catch (e) {
+    res.redirect("/");
+  }
+});
+
+app.post("/buy", async (req, res) => {
+  try {
+    const name = req.body.name.toUpperCase();
+    const cartData = await CartData.find();
+    if (cartData.length > 0) {
+      await PurchaseRecord.create({ name: name, data: cartData });
+      await CartData.deleteMany({});
+    }
+    res.redirect("/");
   } catch (e) {
     res.redirect("/");
   }
