@@ -18,9 +18,11 @@
     <title>Store-Manager</title>
   </head>
   <body>
+    
     <!-- Body Begins-->
     <div class="container">
-
+      <!--Error toast-->
+      <%= message %> 
       <!-- Header-->
       <div class="d-flex flex-row my-2 justify-content-between">
         <h1>Manage Store</h1>
@@ -60,7 +62,6 @@
         <button type="submit" class="btn btn-success">Add to Stock</button>
       </div>
     </form>
-
     <!--Stock details and management-->
       <table class="mt-4 table table-striped table-responsive">
         <thead>
@@ -75,7 +76,7 @@
             <td><%= data.item%></td>
             <td><%= data.quantity %></td>
             <td>
-              <form action="/delete/<%= data.id %> " method="POST">
+              <form action="/delete/<%= data.item %> " method="POST">
                 <button
                   type="submit"
                   class="btn btn-danger"
@@ -85,7 +86,7 @@
               </form>
             </td>
             <td>
-              <form action="/addtocart/<%= data.id %> " method="POST">
+              <form action="/addtocart/<%= data.item%> " method="POST">
                 <button class="btn btn-primary">Add to Cart</button>
               </form>
             </td>
@@ -110,15 +111,16 @@
           <tbody>
             <% cartData.forEach(data => {%>
             <tr>
+              
               <td><%= data.item%></td>
               <td><%= data.quantity %></td>
               <td>
-                <form action="/delete/<%= data.id %> " method="POST">
+                <form action="/deletecart/<%= data.item %> " method="POST">
                   <button
                     type="submit"
                     class="btn btn-danger"
                   >
-                    Remove
+                    Remove from Cart
                   </button>
                 </form>
               </td>
