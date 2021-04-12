@@ -23,7 +23,33 @@ app.get("/", async (req, res) => {
     res.render("index.ejs", {
       storeData: storeData,
       cartData: cartData,
-      message: "",
+      message: ""
+    });
+  } catch (e) {
+    res.redirect("/");
+  }
+});
+app.get("/search", async (req, res) => {
+  try {
+    const data = await PurchaseRecord.find();
+    res.render("search.ejs", { data: data });
+  } catch (e) {
+    res.redirect("/");
+  }
+});
+
+app.post("/search", async (req, res) => {
+  try {
+    const data = await PurchaseRecord.find({
+      name: req.body.name.toUpperCase(),
+    });
+    const storeData = await StoreData.find();
+    const cartData = await CartData.find();
+    const purchaseRecord = await PurchaseRecord.find();
+    res.render("index.ejs", {
+      storeData: storeData,
+      cartData: cartData,
+      
     });
   } catch (e) {
     res.redirect("/");

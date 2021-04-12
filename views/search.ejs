@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+    <title>Store-Manager</title>
+  </head>
+  <body>
+    <!-- Body Begins-->
+    <div class="container">
+      <!-- Header-->
+      <div class="d-flex flex-row my-2 justify-content-between">
+        <h1>Manage Store</h1>
+        <div>
+          <a class="btn btn-primary" href="/">Back</a>
+        </div>
+      </div>
+      <% data.forEach(elem => { %>
+      <div class="border m-2">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="p-1 fs-2"><%=elem.name %></div>
+          <div class="p-1 fs-2"><%=elem.date %></div>
+        </div>
+        <div>
+          <div class="d-flex flex-row justify-content-around border">
+            <div class="p-1 fs-5 fw-bold">Item</div>
+            <div class="p-1 fs-5 fw-bold">Quantity</div>
+          </div>
+
+          <% elem.data.forEach(subElem => { %>
+          <div class="d-flex flex-row justify-content-around border">
+            <div class="p-1"><%= subElem.item%></div>
+            <div class="p-1"><%= subElem.quantity%></div>
+          </div>
+          <%})%>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </body>
+</html>

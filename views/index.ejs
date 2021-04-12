@@ -25,7 +25,7 @@
         overflow-x: hidden;
         padding-top: 20px;
       }
-
+      
       /* Control the left side */
       .left {
         left: 0;
@@ -40,11 +40,12 @@
   <body>
     <!-- Body Begins-->
     <div class="container">
-      <!--Error toast-->
-      <%= message %>
       <!-- Header-->
       <div class="d-flex flex-row my-2 justify-content-between">
         <h1>Manage Store</h1>
+        <div>
+          <a href="/search" class="btn btn-primary">See Sales Data</a>
+        </div>
       </div>
 
       <!-- Add Stock form-->
@@ -112,6 +113,28 @@
             <% }) %>
           </tbody>
         </table>
+        <h2 class="my-3">FIND SALES DATA</h2>
+        <form
+          action="/search"
+          method="POST"
+          class="my-4 form-group d-flex flex-row justify-content-start"
+          autocomplete="off"
+        >
+          <div class="mb-3 mx-2">
+            <label for="name" class="visually-hidden form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name"
+              name="name"
+              id="name"
+              required
+            />
+          </div>
+          <div class="mb-3 mx-2">
+            <button type="submit" class="btn btn-success">Find</button>
+          </div>
+        </form>
       </div>
       <!--  Buy Item section -->
       <div class="container split right">

@@ -7,7 +7,7 @@ const purchaseRecordSchema = new mongoose.Schema({
   },
   date: {
     type: String,
-    default: new Date().getTime(),
+    default: new Date().toLocaleString(),
   },
   data: [
     {
